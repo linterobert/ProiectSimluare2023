@@ -8,24 +8,57 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public LayerMask layerMask;
     public bool grounded;
+    public bool isInCar;
+    public Renderer playerRenderer;
+
+    [SerializeField]
+    public GameObject PlayerCamera;
+    [SerializeField]
+    public GameObject CarCamera;
+
+
+    private Vector3 spawnPosition;
+
     // Start is called before the first frame update
     void Start()
     {
         this.rb = GetComponent<Rigidbody>();
+        this.playerRenderer = GetComponentInChildren<Renderer>();
+        this.playerRenderer.enabled = true;
+
+        this.isInCar = false;
+        
+        PlayerCamera.SetActive(true);
+        CarCamera.SetActive(false);
+
+        this.spawnPosition = transform.position;
     }
 
     private void FixedUpdate()
     {
-        Grounded();
-        Jump();
-        Move();
+        if (!isInCar)
+        {
+            Grounded();
+            Jump();
+            Move();
+            CheckCarEnter();
+        }
+        else
+        {
+            CheckCarExit();
+        }
     }
     // Update is called once per frame
     private void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && this.grounded) 
+        if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
-            this.rb.AddForce(Vector3.up * 4, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * 2, ForceMode.Impulse);
+            anim.SetBool("jump", true); 
+        }
+        else
+        {
+            anim.SetBool("jump", false); 
         }
     }
     
@@ -39,7 +72,6 @@ public class PlayerController : MonoBehaviour
         {
             this.grounded = false;
         }
-        this.anim.SetBool("jump", !this.grounded);
     }
 
     private void Move()
@@ -47,13 +79,81 @@ public class PlayerController : MonoBehaviour
         float verticalAxis = Input.GetAxis("Vertical");
         float horizontalAxis = Input.GetAxis("Horizontal");
 
-        Vector3 movement = this.transform.forward * verticalAxis + this.transform.right * horizontalAxis;
-        movement.Normalize();
+        //  movement direction based on the player's forward and right vectors
+        Vector3 playerForward = transform.forward;
+        Vector3 playerRight = transform.right;
+        playerForward.y = 0f; 
+        playerRight.y = 0f;
+        playerForward.Normalize();
+        playerRight.Normalize();
 
-        this.transform.position += movement * 0.4f;
+        //  movement vector relative to the player's rotation
+        Vector3 movement = (playerForward * verticalAxis + playerRight * horizontalAxis).normalized;
+        
+        //  rotation direction based on the movement vector
+        Quaternion targetRotation = Quaternion.LookRotation(movement, Vector3.up);
 
-        this.anim.SetFloat("vertical", verticalAxis);
-        this.anim.SetFloat("horizontal", horizontalAxis);
+        // rotate the player towards the target rotation
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 3);
+
+        
+        float moveSpeed = 4.5f;
+        this.transform.position += movement * moveSpeed * Time.deltaTime;
+
+
+        // animator parameters
+        anim.SetFloat("vertical", verticalAxis);
+        anim.SetFloat("horizontal", horizontalAxis);
+    }
+
+
+
+    private void CheckCarExit()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            this.isInCar = false;
+            this.transform.parent = null;
+            this.rb.isKinematic = false;
+            
+
+            GameObject car = GameObject.FindGameObjectWithTag("Car");
+            car.GetComponent<CarControl>().playerControl = false;
+
+            Vector3 carPosition = car.transform.position;
+
+            // offset to the left
+            Vector3 offset = -car.transform.right * 2.0f;
+            
+            transform.position = carPosition + offset;
+            
+            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+
+            this.playerRenderer.enabled = true;
+
+
+            PlayerCamera.SetActive(true);
+            CarCamera.SetActive(false);
+        }
+    }
+
+    private void CheckCarEnter()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            this.isInCar = true;
+            // by tag
+            GameObject car = GameObject.FindGameObjectWithTag("Car");
+            car.GetComponent<CarControl>().playerControl = true;
+            this.transform.parent = car.transform;
+            this.rb.isKinematic = true;
+            this.playerRenderer.enabled = false;
+
+
+
+            PlayerCamera.SetActive(false);
+            CarCamera.SetActive(true);
+        }
     }
 
 }
