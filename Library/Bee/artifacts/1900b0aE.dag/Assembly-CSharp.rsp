@@ -377,8 +377,11 @@
 "Assets/RCK 2.3/Scripts/VehicleDamage.cs"
 "Assets/RCK 2.3/Skidmarks/Skidmarks Essentials/Skidmarks.cs"
 "Assets/RCK 2.3/Skidmarks/WheelSkidmarks.cs"
-"Assets/UI/MinimapCameraController.cs"
-"Assets/UI/MinimapCameraFollower.cs"
+"Assets/UI/Minimap/MinimapCameraController.cs"
+"Assets/UI/Minimap/MinimapCameraFollower.cs"
+"Assets/UI/Portal/PortalCamera.cs"
+"Assets/UI/Portal/PortalTeleporter.cs"
+"Assets/UI/Portal/PortalTextureSetup.cs"
 -langversion:9.0
 
 /deterministic

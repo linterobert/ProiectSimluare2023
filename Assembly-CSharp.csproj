@@ -59,14 +59,15 @@
   <ItemGroup>
     <Compile Include="Assets\RCK 2.3\Scripts\VehicleDamage.cs" />
     <Compile Include="Assets\RCK 2.3\Scripts\PoliceLights.cs" />
-    <Compile Include="Assets\UI\MinimapCameraFollower.cs" />
     <Compile Include="Assets\CameraController2.cs" />
     <Compile Include="Assets\PlayerController.cs" />
-    <Compile Include="Assets\UI\MinimapCameraController.cs" />
     <Compile Include="Assets\CAR\CarControl.cs" />
     <Compile Include="Assets\CarAI\Scripts\controllingCarAI.cs" />
+    <Compile Include="Assets\UI\Portal\PortalTeleporter.cs" />
     <Compile Include="Assets\RCK 2.3\Scripts\CarSwitch.cs" />
     <Compile Include="Assets\CarController.cs" />
+    <Compile Include="Assets\UI\Portal\PortalCamera.cs" />
+    <Compile Include="Assets\UI\Portal\PortalTextureSetup.cs" />
     <Compile Include="Assets\RCK 2.3\Scripts\VehicleControl.cs" />
     <Compile Include="Assets\CameraController.cs" />
     <Compile Include="Assets\RCK 2.3\Skidmarks\WheelSkidmarks.cs" />
@@ -76,6 +77,8 @@
     <Compile Include="Assets\RCK 2.3\Skidmarks\Skidmarks Essentials\Skidmarks.cs" />
     <Compile Include="Assets\CarAI\Scripts\CarAI.cs" />
     <Compile Include="Assets\CarAI\Scripts\SensorManager.cs" />
+    <Compile Include="Assets\UI\Minimap\MinimapCameraController.cs" />
+    <Compile Include="Assets\UI\Minimap\MinimapCameraFollower.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\NavMeshComponents\ProjectSettings\ProjectVersion.txt" />
@@ -85,6 +88,7 @@
     <None Include="Assets\RCK 2.3\Standard Assets\Projectors\Guidelines.txt" />
     <None Include="Assets\Supercyan Free Forest Sample\Shaders\SupercyanShader.shader" />
     <None Include="Assets\CarAI\Readme.txt.txt" />
+    <None Include="Assets\UI\Portal\ScreenCutoutShader.shader" />
     <None Include="Assets\RCK 2.3\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
     <None Include="Assets\RCK 2.3\Shaders\TransparentRef.shader" />
     <None Include="Assets\RCK 2.3\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
