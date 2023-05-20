@@ -53,18 +53,19 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
-            rb.AddForce(Vector3.up * 2, ForceMode.Impulse);
-            anim.SetBool("jump", true); 
+            rb.AddForce(Vector3.up *  3f, ForceMode.VelocityChange);
+            grounded = false; 
+            anim.SetBool("jump", true);
         }
         else
         {
-            anim.SetBool("jump", false); 
+            anim.SetBool("jump", false);
         }
     }
     
     private void Grounded()
     {
-        if(Physics.CheckSphere(this.transform.position + Vector3.down, 0.2f, layerMask))
+        if(Physics.CheckSphere(this.transform.position + Vector3.down, 1.5f, layerMask))
         {
             this.grounded = true;
         }
@@ -153,6 +154,13 @@ public class PlayerController : MonoBehaviour
 
             PlayerCamera.SetActive(false);
             CarCamera.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GameObject car = GameObject.FindGameObjectWithTag("Car");
+            car.transform.position += Vector3.up * 1.0f;
+            car.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         }
     }
 
