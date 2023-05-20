@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public GameObject CarCamera;
 
+    [SerializeField]
+    public GameObject PlayerMinimap;
+    [SerializeField]
+    public GameObject CarMinimap;
 
     private Vector3 spawnPosition;
 
@@ -30,6 +34,9 @@ public class PlayerController : MonoBehaviour
         
         PlayerCamera.SetActive(true);
         CarCamera.SetActive(false);
+
+        PlayerMinimap.SetActive(true);
+        CarMinimap.SetActive(false);
 
         this.spawnPosition = transform.position;
     }
@@ -131,10 +138,13 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
 
             this.playerRenderer.enabled = true;
-
+            EnableChildren(true);
 
             PlayerCamera.SetActive(true);
             CarCamera.SetActive(false);
+
+            PlayerMinimap.SetActive(true);
+            CarMinimap.SetActive(false);
         }
     }
 
@@ -150,10 +160,13 @@ public class PlayerController : MonoBehaviour
             this.rb.isKinematic = true;
             this.playerRenderer.enabled = false;
 
-
+            EnableChildren(false);
 
             PlayerCamera.SetActive(false);
             CarCamera.SetActive(true);
+
+            PlayerMinimap.SetActive(false);
+            CarMinimap.SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -161,6 +174,14 @@ public class PlayerController : MonoBehaviour
             GameObject car = GameObject.FindGameObjectWithTag("Car");
             car.transform.position += Vector3.up * 1.0f;
             car.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+        }
+    }
+
+    private void EnableChildren(bool enable)
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(enable);
         }
     }
 
