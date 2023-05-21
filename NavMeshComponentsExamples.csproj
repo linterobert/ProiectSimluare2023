@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{E388AB57-0B14-FA5B-9B9E-843B7A8F5839}</ProjectGuid>
+    <ProjectGuid>{FED672B8-8189-7A03-AD03-E944FB9C7E9F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>NavMeshComponentsExamples</AssemblyName>
@@ -53,7 +53,6 @@
     <UnityVersion>2022.2.17f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.2.17f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.2.17f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -734,7 +733,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{8B6CC577-7BAE-6168-FE6B-654CF43310BF}</Project>
+      <Project>{FCE13227-2CAB-D616-7351-FDB2F1F95C64}</Project>
       <Name>NavMeshComponents</Name>
     </ProjectReference>
   </ItemGroup>
