@@ -16,7 +16,7 @@ public class CarControl : MonoBehaviour
     private float currentbreakForce;
     private bool isBreaking;
 
-    [SerializeField] private float motorForce;
+    [SerializeField] public float motorForce;
     [SerializeField] private float breakForce;
     [SerializeField] private float maxSteerAngle;
 
@@ -32,6 +32,11 @@ public class CarControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!GameController.Instance.GameRunning)
+        {
+            return;
+        }
+
         if (playerControl)
         {
             GetInput();
@@ -40,7 +45,6 @@ public class CarControl : MonoBehaviour
             UpdateWheels();
         }
     }
-
 
     private void GetInput()
     {
