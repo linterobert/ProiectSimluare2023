@@ -43,6 +43,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!GameController.Instance.GameRunning)
+        {
+            PlayerCamera.SetActive(false);
+            CarCamera.SetActive(false);
+            return;
+        }
+
+
         if (!isInCar)
         {
             Grounded();
